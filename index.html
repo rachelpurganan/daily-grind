@@ -85,52 +85,81 @@
       </small>
     </footer>
     <!-- END Footer -->
-	<script src="http://code.jquery.com/jquery-latest.js" type="text/javascript"></script>
-	<script type="text/javascript">
-	$("document").ready(function(){
-		$('.seasons a').click(function(e){//find all a tags inside class of seasons
-            e.preventDefault();//stop default submission
-			var season = $(this).attr("href");//contents of href attribute of this element
-			var stylesheet = $('#mainStylesheet');
-			season = season.toLowerCase();
-			switch(season)
-			{
-				case 'spring':
-				$('#logo').attr("src","images/spring.gif");
-				$('#wear').attr("src","images/spring-wear.jpg");
-				$('main header h3').html("Get a jump on Spring wear!");
-				break;
-				
-				case 'summer':
-				$('#logo').attr("src","images/summer.gif");
-				$('#wear').attr("src","images/summer-wear.jpg");
-				$('main header h3').html("Make Summer a hummer!");
-				break;
-				
-				case 'fall':
-				$('#logo').attr("src","images/fall.gif");
-				$('#wear').attr("src","images/fall-wear.jpg");
-				$('main header h3').html("Fall into Fall!");
-				break;
-				
-				case 'winter':
-				$('#logo').attr("src","images/winter.gif");
-				$('#wear').attr("src","images/winter-wear.jpg");
-				$('main header h3').html("Keep warm this Winter!");
-				break;
-				
-				default:
-				$('#logo').attr("src","images/four-seasons.gif");
-				$('#wear').attr("src","images/300x400.png");
-				$('main header h3').html("Outfitter for all seasons!");
-				
-			}
+	<script>
+
+		/*
+
+			Use HTML/CSS & JavaScript to create a single page that rotates unique colors 
+			and content for each weekday (Sunday to Saturday) into a page.  
 			
-			var season = "css/" + season + ".css";
-			$(stylesheet).attr("href",season);
-			//alert(season);
-		});
-	});
+			The content must include:
+
+			One unique image, with appropriate and matching content in the alt tag.  
+			
+			A paragraph or two of content that describes the daily item 
+			(paragraph must include the name of the highlighted weekday)
+			
+			A unique color that supports the image and paragraph of content
+
+		*/
+		let myDate = new Date();
+
+		let today = myDate.getDay();
+		let coffee = "";//will be an object
+
+		//TEST ONLY, DON'T LEAVE THIS LINE IN THE FINAL VERSION
+		//today = 3;
+
+		switch(today){
+			case 0:
+				today = "Sunday";
+			break;
+
+			case 1:
+				today = "Monday";
+			break;
+
+			case 2: 
+				today = "Tuesday";
+			break;
+
+			case 3:
+				today = "Wednesday";
+
+				coffee = {
+					pic: "pumpkin-spice-latte.jpg",
+					alt: "Pumpkin Spice Latte",
+					color: "orange",
+					description: `Pumpkin Spice Lattes are awesome!`,
+					coffee: "Pumpkin Spice Latte",
+					weekday: "Wednesday"
+				}
+			break;
+
+			case 4:
+				today = "Thursday";
+			break;
+
+			case 5:
+				today = "Friday";
+			break;
+
+			case 6:
+				today = "Saturday";
+			break;
+
+			default: 
+				today = "Incorrect Day";
+		
+		}
+
+
+
+		console.log(today);
+
+		console.log(coffee);
+
+		//alert("hi there!")
     </script>
 	
 </body>

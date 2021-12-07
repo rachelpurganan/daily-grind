@@ -51,6 +51,16 @@
     <main>
 		 <header><h3 class="slogan">You drink our coffee, we make large bucks!</h3></header>
 		 <div id="coffeeTarget"></div>
+		
+		<p>Click below to view the coffee special for different days of the week</p>
+		<p><a href="?day=0">Sunday</a></p>
+		<p><a href="?day=1">Monday</a></p>
+		<p><a href="?day=2">Tuesday</a></p>
+		<p><a href="?day=3">Wednesday</a></p>
+		<p><a href="?day=4">Thursday</a></p>
+		<p><a href="?day=5">Friday</a></p>
+		<p><a href="?day=6">Saturday</a></p>
+
 		 <!--
         <p>
     		 <img src="images/pumpkin-spice-latte.jpg" alt="Our Pumpkin Spice Latte tastes great on a Fall Day!" id="coffee" />
@@ -87,21 +97,30 @@
 			let myReturn = "";
 
 			myReturn += `<p>
-             <img src="images/${coffee.pic}" alt="Our Pumpkin Spice Latte tastes great on a Fall Day!" id="coffee" />
-            <strong>Monday's Coffee Special:</strong> Monday's daily coffee special is <strong>Pumpkin Spice Latte</strong>, which makes us wish it was always Fall, as this is one of our top sellers!
+             <img src="images/${coffee.pic}" alt="${coffee.alt}" id="coffee" />
+            <strong>${coffee.weekday}'s Coffee Special:</strong> ${coffee.weekday}'s daily coffee special is <strong>${coffee.coffee}</strong>, ${coffee.description}
        		 </p>`;
 			return myReturn;
 		}
 
-
-
-
-
+		//use location object to access querystring (address bar)
+		const queryString = window.location.search;
+    
+		//output to console    
+		console.log(queryString);
+		
+		//separate querystring parameters
+		const urlParams = new URLSearchParams(queryString);
 
 		let myDate = new Date();
 
 		let today = myDate.getDay();
 		let coffee = "";//will be an object
+
+		if(urlParams.has("day")){
+			today = urlParams.get("day");
+			today = parseInt(today);
+		}
 
 		//TEST ONLY, DON'T LEAVE THIS LINE IN THE FINAL VERSION
 		//today = 6;
@@ -138,9 +157,9 @@
 
 				coffee = {
 					pic: "caramel-latte.jpg",
-					alt: "A pic of caramel latte",
-					color: "brown",
-					description: `a perfect drink for this gloomy weather`,
+					alt: "A pic of a caramel latte",
+					color: "gold",
+					description: `Our caramel latte is very popular!`,
 					coffee: "Caramel Latte",
 					weekday: "Tuesday"
 				}
@@ -204,6 +223,8 @@
 		}
 
 		document.getElementById("coffeeTarget").innerHTML = coffeeTemplate(coffee);
+
+		document.querySelector("html").style.backgroundColor = coffee.color;
 
 		console.log(today);
 
